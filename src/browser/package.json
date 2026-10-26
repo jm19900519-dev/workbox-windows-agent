@@ -1,0 +1,8 @@
+{
+  "name": "workbox-browser-bridge",
+  "version": "0.1.0-candidate",
+  "private": true,
+  "description": "Optional guest browser bridge; install the same exact Playwright version on both ends",
+  "engines": {"node": ">=22"},
+  "dependencies": {"playwright": "1.63.0-alpha-2026-08-31"}
+}

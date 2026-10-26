@@ -1,0 +1,21 @@
+# Real configuration, credentials, browser state and user data never belong in Git.
+*.local.json
+*.credential.xml
+connection.json
+private/
+state/
+results/
+requests/
+request-history/
+node_modules/
+browser-cache/
+*.png
+*.jpg
+*.mp4
+*.vhd*
+*.iso
+*.exe
+*.dll
+*.zip
+__pycache__/
+.env*
