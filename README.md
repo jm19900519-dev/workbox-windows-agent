@@ -2,6 +2,8 @@
 
 [中文](README.zh-CN.md) · [Installation](docs/INSTALL.en.md) · [Windows compatibility](docs/COMPATIBILITY.en.md) · [Usage](docs/USAGE.en.md) · [Product introduction](docs/INTRODUCTION.en.md)
 
+**Open-source preview v0.1.0-preview.1** · [GitHub repository](https://github.com/jm19900519-dev/workbox-windows-agent) · [Downloads and releases](https://github.com/jm19900519-dev/workbox-windows-agent/releases)
+
 Run desktop automation in a local virtual machine, and keep your everyday desktop for your own work.
 
 WorkBox is a desktop automation toolkit for a **local Windows Hyper-V virtual machine**. It gives your agent or scripts entry points to observe the screen, operate supported windows, use a visible browser and retrieve results—so tasks that need a real Windows desktop can run in a separate workspace.
@@ -44,7 +46,7 @@ Then try the [visible browser example](examples/browser.ps1), or follow the [usa
 
 ## Current stage and evidence
 
-**WorkBox is in a prerelease, private-trial stage.** The original local implementation has evidence for selected desktop/web actions, window and popup fitting, synthetic cookie/localStorage restoration within a scope, and isolation across projects/users. Its original console entry was also observed opening one existing guest session with a complete desktop. The portable candidate passed source checks, bounded local tests, privacy scanning, archive consistency checks and independent review.
+**WorkBox is an open-source preview, not a stable release.** The original local implementation has evidence for selected desktop/web actions, window and popup fitting, synthetic cookie/localStorage restoration within a scope, and isolation across projects/users. Its original console entry was also observed opening one existing guest session with a complete desktop. The portable candidate passed source checks, bounded local tests, privacy scanning, archive consistency checks and independent review. The source is offered for inspection, learning and bounded trials; public release is not cross-machine acceptance.
 
 That does not establish acceptance on another machine. Cross-machine installation, real window opening through the portable entry, production website login, cold boot and login after logout remain unverified. Read-only preflight and synthetic version-matrix tests do not replace that acceptance. Websites can expire sessions; saved state neither guarantees persistent login nor bypasses authentication.
 

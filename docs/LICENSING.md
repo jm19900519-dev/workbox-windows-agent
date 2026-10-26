@@ -1,12 +1,12 @@
 # Licensing and provenance / 许可与来源
 
-This private candidate contains locally developed WorkBox orchestration code and newly written portable adapters. The reviewed import process records SHA-256 for the source worker, lease and frozen session/DPAPI helper outside the release. It does not copy source repositories, third-party SDK code, private state or assets. Provenance identifies the imported files; it does not by itself establish legal ownership.
+This open-source preview contains locally developed WorkBox orchestration code and portable adapters. The reviewed import process records SHA-256 for the source worker, lease and frozen session/DPAPI helper outside the release. It does not copy source repositories, third-party SDK code, private state or assets. Provenance identifies the imported files; it does not by itself establish legal ownership.
 
-当前私有候选含本地开发的 WorkBox 编排源码及新写便携适配。导入过程在包外记录 worker、租约、冻结会话/DPAPI helper 的 SHA-256；不复制整仓、第三方 SDK、私有状态或资产。来源可追溯不自动证明法律权属。
+当前开源预览版含本地开发的 WorkBox 编排源码及便携适配。导入过程在包外记录 worker、租约、冻结会话/DPAPI helper 的 SHA-256；不复制整仓、第三方 SDK、私有状态或资产。来源可追溯不自动证明法律权属。
 
-Under the user's authorization to open-source this project, the maintainer selected MIT for the project's own written/generated source and documentation, with the notice `WorkBox contributors`. The selected local files have no identified copied third-party SDK implementation or conflicting license notice. This review does not prove all possible copyright claims are absent. [LICENSE](../LICENSE) applies only to WorkBox-owned material; [NOTICE](../NOTICE.md) preserves the separate dependency boundaries. The private trial is not a completed public release.
+Under the user's authorization to open-source this project, the maintainer selected MIT for the project's own written/generated source and documentation, with the notice `WorkBox contributors`. The selected local files have no identified copied third-party SDK implementation or conflicting license notice. This review does not prove all possible copyright claims are absent. [LICENSE](../LICENSE) applies only to WorkBox-owned material; [NOTICE](../NOTICE.md) preserves the separate dependency boundaries. Open-source licensing does not imply stable-release or cross-machine acceptance.
 
-依据用户本次开源授权，维护者为本项目自有源码选用 MIT；自有文档采用相同许可，署名 `WorkBox contributors`。所选本地文件未发现复制第三方 SDK 实现或冲突许可标注；这不等于证明不存在任何潜在权利主张。`LICENSE` 只覆盖 WorkBox 自有材料，`NOTICE` 保留依赖边界；私有试用不等于公开发布完成。
+依据用户本次开源授权，维护者为本项目自有源码选用 MIT；自有文档采用相同许可，署名 `WorkBox contributors`。所选本地文件未发现复制第三方 SDK 实现或冲突许可标注；这不等于证明不存在任何潜在权利主张。`LICENSE` 只覆盖 WorkBox 自有材料，`NOTICE` 保留依赖边界；开源许可不代表稳定版或跨机验收通过。
 
 Third-party prerequisites are acquired separately:
 

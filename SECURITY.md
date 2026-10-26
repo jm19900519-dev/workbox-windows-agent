@@ -12,6 +12,6 @@ The ordinary user must not be an administrator. Keep source/config read-only to 
 
 普通操作用户不得是管理员，源码与配置对其只读。代码仅在已配置 VM 执行，不能拿来控制宿主。不得绕权限、本人认证、验证码、付费墙或安全审核；系统/网站/应用许可另行适用。
 
-For a suspected leak, stop sharing the artifact, revoke/rotate the affected credential or browser capability through the owner, preserve minimal private evidence and prepare a sanitized report. Do not paste the secret into a public issue. Private security contact will be established when the repository owner confirms the release destination.
+For a suspected leak, stop sharing the artifact, revoke/rotate the affected credential or browser capability through the owner, preserve minimal private evidence and prepare a sanitized report. Do not paste secrets into a public issue. Use an owner-verified private reporting channel when available; otherwise report only the redacted issue and arrange private handling before sharing sensitive evidence. Do not assume a private reporting channel is configured merely because the repository is public.
 
-怀疑泄漏时停止分享，由所有者撤销/更换受影响凭据或连接能力，保存最小私有证据，再做脱敏报告，不把秘密贴进 public issue。正式仓库所有者确定后补私人安全联系方式。
+怀疑泄漏时停止分享，由所有者撤销/更换受影响凭据或连接能力，保存最小私有证据，再做脱敏报告，不把秘密贴进 public issue。有经所有者核实的私有报告渠道时使用该渠道；否则只报告脱敏问题，先约定私下处理方式再分享敏感证据。仓库公开不代表已配置私有漏洞报告渠道。

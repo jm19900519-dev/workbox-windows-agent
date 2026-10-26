@@ -1,5 +1,9 @@
 # Verification and limitations / 验证与限制
 
+**Release status: open-source preview.** Public availability does not add runtime evidence or establish a stable release. For downloadable artifacts and archive hashes, use [Releases](https://github.com/jm19900519-dev/workbox-windows-agent/releases).
+
+**发布阶段：开源预览版。** 公开源码不会增加运行证据，也不代表稳定版。下载产物与归档哈希见 [Releases](https://github.com/jm19900519-dev/workbox-windows-agent/releases)。
+
 Version criteria and host/guest, desktop/browser distinctions are in the [English compatibility matrix](COMPATIBILITY.en.md) / [中文兼容性矩阵](COMPATIBILITY.zh-CN.md). A capability preflight or synthetic version fixture establishes its checked conditions and decision logic, not real deployment on every listed Windows release. 版本预检或合成矩阵用例只证明已检查条件与判断逻辑，不是各Windows版本真实部署验收。
 
 The 2026-10-26 read-only preflight freshly checked the existing guest: EnterpriseEval build 26300 x64, Windows PowerShell 5.1, and an enabled non-administrator target account with an interactive session. Its effective execution policy was `Restricted`, blocking the portable fresh-install path. This is not evidence that the existing worker failed. No new guest installation was performed. The host baseline is Windows 11 Pro build 26100 x64 / PowerShell 7.6.5; these remain one-machine observations.
@@ -14,17 +18,17 @@ The guest's checked Node was version 22 on x64. The supplied npm path was absent
 
 本次来宾已核Node为22/x64；指定npm路径不存在，另对已知Node父目录的4个标准入口做了有界检查，未发现。它阻断的是本次浏览器安装输入，不是全来宾软件盘点，不能推出必须新装npm；现有服务未改。宿主浏览器预检仅核OS前提，来宾仅核安装前提，`readiness` 仍是 `not-assessed`。
 
-This candidate is not an independently proven cross-machine installer. Local source parsing, dependency lock resolution, privacy export, fixture tests and deterministic archive checks are recorded separately from live guest/UI tests. Consult the accompanying private handoff for the exact archive SHA and test reports; do not ship operator-specific raw evidence in this repository.
+This preview is not an independently proven cross-machine installer. Local source parsing, dependency lock resolution, privacy export, fixture tests and deterministic archive checks are recorded separately from live guest/UI tests. Release notes provide the artifact SHA and validation summary; operator-specific raw evidence remains private and is not shipped in this repository.
 
-本候选尚未经独立新机安装验收。源码解析、锁文件解析、隐私导出、fixture 与可复现归档检查和真实来宾/UI 测试分开记录。精确归档 SHA 与报告见私有交接，不把操作者原始证据混入仓库。
+本预览版尚未经独立新机安装验收。源码解析、锁文件解析、隐私导出、fixture 与可复现归档检查和真实来宾/UI 测试分开记录。发布说明提供产物 SHA 和验证摘要；操作者原始证据保持私有，不混入仓库。
 
 The original same-machine implementation had bounded native/browser evidence; the frozen session helper has separate same-machine evidence for window fitting and scoped state restore. Portable path/config changes require their own trial. A modified installer cannot inherit the original machine's acceptance. New browser examples and installers have not been exercised on a fresh Windows guest by this packaging task.
 
 原本机实现有有界原生/浏览器证据，冻结会话 helper 有本机窗口适配和 scoped state 恢复证据。便携路径/配置改造仍需单独试用；新安装器不继承原机器验收。本打包任务没有在全新 Windows 来宾执行新安装/浏览器示例。
 
-Required trial before promotion: exact VM binding and non-admin installation; current screenshot/identity; Unicode Notepad input and saved content; rejected wrong session/target; original-ID timeout recovery; full-task lease exclusion; browser own-context cleanup; fresh guest display edges; scope isolation for same/different project/user/site; absence of unintended host input. Test failure is not an invitation to widen access.
+Required evidence before claiming stable or broader verified support: exact VM binding and non-admin installation; current screenshot/identity; Unicode Notepad input and saved content; rejected wrong session/target; original-ID timeout recovery; full-task lease exclusion; browser own-context cleanup; fresh guest display edges; scope isolation for same/different project/user/site; absence of unintended host input. These remain open acceptance items for the public preview. Test failure is not an invitation to widen access.
 
-晋升前必试：精确 VM 绑定与普通用户安装、新截图/身份、记事本 Unicode 输入与落盘、错误 session/目标拒绝、原 ID 超时恢复、整任务租约互斥、browser 自有 context 清理、实际来宾显示边界、相同/不同项目用户站点 scope 隔离、宿主无误输入。失败不能作为放宽权限理由。
+宣称稳定版或扩大已验支持范围前须补足：精确 VM 绑定与普通用户安装、新截图/身份、记事本 Unicode 输入与落盘、错误 session/目标拒绝、原 ID 超时恢复、整任务租约互斥、browser 自有 context 清理、实际来宾显示边界、相同/不同项目用户站点 scope 隔离、宿主无误输入。这些保留为公开预览版的待验项；失败不能作为放宽权限理由。
 
 Known limits: Windows Hyper-V only; real interactive guest sign-in required; no automatic VM provisioning/reboot/OOBE; no generic native-app support; no guaranteed captcha/authentication bypass; no cross-user/machine portability of DPAPI state; no distributed lock; no production SLA; no automatic NAT adaptation; no automated destructive uninstall or in-place upgrade. Native security-window checks are a conservative heuristic, not an OS security boundary. Browser contexts and origin-filtered state are not permission sandboxes. Scoped cookie domains may include parent-domain cookies; review each scope before saving.
 

@@ -2,15 +2,15 @@
 
 [中文](INTRODUCTION.zh-CN.md) · [Project home](../README.md)
 
-The following copy is prepared for a future announcement. WorkBox remains in a prerelease, private-trial stage; this text does not announce a completed public release or cross-machine acceptance.
+WorkBox is presented as the **v0.1.0-preview.1 open-source preview** for inspection, learning and bounded trials. It is not a stable release and has not completed cross-machine acceptance. [View the source](https://github.com/jm19900519-dev/workbox-windows-agent) · [Downloads and releases](https://github.com/jm19900519-dev/workbox-windows-agent/releases)
 
 ## One sentence
 
-WorkBox gives your AI a Windows desktop of its own: run supported desktop and web actions in a local Hyper-V VM and inspect the results. Currently available as a prerelease trial candidate.
+WorkBox gives your AI a Windows desktop of its own: run supported desktop and web actions in a local Hyper-V VM and inspect the results. Currently an open-source preview.
 
 ## Short paragraph
 
-When an agent needs a real desktop, its experiments do not have to operate directly on your everyday workspace. WorkBox is a local Windows Hyper-V desktop automation toolkit that lets your own agent or scripts observe the screen, operate supported windows, use a visible browser and retrieve screenshots and receipts. A shared lease lets cooperating tasks take turns; optional encrypted state, scoped by project, user and sites, supports later work within that same scope. WorkBox is in private prerelease trial, with cross-machine installation and production website login still to be verified.
+When an agent needs a real desktop, its experiments do not have to operate directly on your everyday workspace. WorkBox is a local Windows Hyper-V desktop automation toolkit that lets your own agent or scripts observe the screen, operate supported windows, use a visible browser and retrieve screenshots and receipts. A shared lease lets cooperating tasks take turns; optional encrypted state, scoped by project, user and sites, supports later work within that same scope. WorkBox is an open-source preview, with cross-machine installation and production website login still to be verified.
 
 ## Announcement copy
 
@@ -22,7 +22,7 @@ On the normal background execution route, actions stay on the guest desktop, red
 
 The browser session helper lets page viewports follow their windows and fits its own new windows and popups. For later tasks within the same scope, you can explicitly save encrypted state for a project, user and set of HTTPS origins. Anonymous sessions remain the default. Saved state does not promise permanent login: website authentication and session expiry still apply.
 
-WorkBox is currently a prerelease candidate for private trial. The original local implementation has evidence for selected desktop, web, display-fitting and synthetic state-isolation scenarios; the portable candidate passed independent review. Installation on a new machine, production website login and cold-boot scenarios still need real trials. It is intended for developers and technical teams willing to configure a local Windows VM and evaluate desktop automation.
+WorkBox is currently an open-source preview. The original local implementation has evidence for selected desktop, web, display-fitting and synthetic state-isolation scenarios; the portable candidate passed independent review. Installation on a new machine, production website login and cold-boot scenarios still need real trials. Opening the source does not change those evidence boundaries. It is intended for developers and technical teams willing to configure a local Windows VM and evaluate desktop automation.
 
 The target environment is Windows Hyper-V. The [compatibility matrix](COMPATIBILITY.en.md) distinguishes host, guest and desktop/browser paths. Existing runtime evidence comes from the original local machine, not every Windows version.
 
