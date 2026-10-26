@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$ReportPath)
 $ErrorActionPreference='Stop'
+if($PSVersionTable.PSEdition -ne 'Core' -or $PSVersionTable.PSVersion.Major -lt 7){throw 'Run host validation with native PowerShell 7.'}
 $root=Split-Path -Parent $PSScriptRoot
 $results=@()
 foreach($file in Get-ChildItem "$root/src","$root/tools","$root/examples" -Filter '*.ps1' -Recurse -File -ErrorAction SilentlyContinue) {

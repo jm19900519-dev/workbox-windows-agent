@@ -1,6 +1,8 @@
 param([Parameter(Mandatory)][ValidateSet('Protect','Unprotect')][string]$Mode)
 $ErrorActionPreference='Stop'
 try {
+ [Console]::InputEncoding=[Text.UTF8Encoding]::new($false)
+ [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
  Add-Type -AssemblyName System.Security
  $inputText=[Console]::In.ReadToEnd()
  $entropy=[Text.Encoding]::UTF8.GetBytes('WorkBox.project-state.v1')

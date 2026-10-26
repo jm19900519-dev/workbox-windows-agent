@@ -1,5 +1,7 @@
 # Use and trial acceptance
 
+First check the host, guest and selected path against the [compatibility guide](COMPATIBILITY.en.md). Host scripts use PowerShell 7; the guest worker uses Windows PowerShell 5.1. Desktop preflight does not substitute for browser preflight, and an `unknown` target-user policy or session does not authorize treating dependent steps as ready.
+
 Use the background command/API route first; use the VM only when a real desktop is needed. Every operator of one VM must coordinate through its same `leaseFile`. The lease is cooperation, not a security boundary or a scheduler.
 
 Run `examples/observe.ps1` first. Open the fresh PNG and JSON yourself: an action's `completed` status proves only transport/action completion. Check target content and visible bounds. A Notepad task can be tested with non-private text such as `WorkBox trial 42`, then compare a new image and the resulting saved file. Do not infer another app is supported from that test.

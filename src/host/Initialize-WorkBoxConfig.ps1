@@ -13,8 +13,7 @@ param(
 . "$PSScriptRoot/Common.ps1"
 if(Test-Path -LiteralPath $ConfigPath){throw 'Configuration exists; review it instead of overwriting'}
 $c=[ordered]@{schema=1;vmId=$VMId.ToString();vmName=$VMName;stateDirectory=$StateDirectory;guestRoot=$GuestRoot;guestComputerName=$GuestComputerName;guestUser=$GuestUser;browserPort=$BrowserPort;credentialPath=(Join-Path $StateDirectory 'manager.credential.xml');leaseFile=(Join-Path $StateDirectory 'desktop.lease')}
-$null=Get-VM -Id $VMId | Where-Object Name -eq $VMName
-if(!(Get-VM -Id $VMId | Where-Object Name -eq $VMName)){throw 'VM name and ID must match'}
+$null=Get-WorkBoxVM $c
 if(Test-Path -LiteralPath $StateDirectory){throw 'Use a new dedicated private state directory'}
 New-Item -ItemType Directory -Path $StateDirectory|Out-Null
 $sid=[Security.Principal.WindowsIdentity]::GetCurrent().User.Value

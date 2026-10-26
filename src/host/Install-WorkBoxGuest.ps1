@@ -5,6 +5,8 @@ $c=Read-WorkBoxConfig $ConfigPath
 if(!$PSCmdlet.ShouldProcess($c.vmName,'Install WorkBox files and a non-elevated interactive scheduled task')){return}
 $s=Open-WorkBoxSession $c
 try {
+ $preflight=Test-WorkBoxCompatibilityFacts -Facts (Get-WorkBoxGuestFacts -Session $s -Config $c) -Role guest
+ Assert-WorkBoxCompatibility $preflight
  Invoke-Command -Session $s -ArgumentList $c -ScriptBlock {
   param($c)
   if($env:COMPUTERNAME -ne $c.guestComputerName -or (Get-CimInstance Win32_ComputerSystem).Model -ne 'Virtual Machine'){throw 'Guest identity mismatch'}
@@ -12,6 +14,7 @@ try {
   $admins=@(Get-LocalGroupMember -SID 'S-1-5-32-544')
   if($admins.SID.Value -contains $u.SID.Value){throw 'Use a dedicated non-administrator guest user'}
   if(Test-Path $c.guestRoot){throw 'Guest root already exists; installation will not overwrite a deployment'}
+  if(Get-ScheduledTask -TaskName 'WorkBox Desktop Worker' -ErrorAction SilentlyContinue){throw 'Task already exists; no files were installed'}
   New-Item -ItemType Directory -Path $c.guestRoot|Out-Null
   $userSid=$u.SID.Value
   & icacls.exe $c.guestRoot /inheritance:r /grant:r '*S-1-5-18:(OI)(CI)F' '*S-1-5-32-544:(OI)(CI)F' "*${userSid}:(OI)(CI)RX"|Out-Null

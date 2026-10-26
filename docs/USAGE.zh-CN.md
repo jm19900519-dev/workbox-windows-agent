@@ -1,5 +1,7 @@
 # 使用与试用验收
 
+先按[兼容性说明](COMPATIBILITY.zh-CN.md)核宿主、来宾和所选通道；宿主用 PowerShell 7，来宾 worker 用 Windows PowerShell 5.1。桌面预检不能替代浏览器预检，目标用户策略或会话为 `unknown` 时不能把依赖步骤当作可运行。
+
 优先后台命令/API，确需桌面才用 VM。同一 VM 所有调用者必须共用配置中的 `leaseFile`。租约仅为显式协作，不是权限隔离或调度器。
 
 先运行 `examples/observe.ps1`，实际打开新 PNG 和 JSON；`completed` 只证明传输/动作返回。核目标内容和可见边界。记事本可用非私密文本 `WorkBox trial 42` 测试，再核新截图和保存文件，不能据此推断别的 App 通过。

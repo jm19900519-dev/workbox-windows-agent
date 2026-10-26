@@ -1,4 +1,6 @@
 $ErrorActionPreference='Stop'
+if($PSVersionTable.PSEdition -ne 'Core' -or $PSVersionTable.PSVersion.Major -lt 7){throw 'WorkBox host PS1 entrypoints require native PowerShell 7. Use the CMD entry only for the Windows PowerShell console bootstrap; do not bypass execution policy.'}
+. "$PSScriptRoot/Compatibility.ps1"
 function Read-WorkBoxConfig([string]$Path) {
     $c=Get-Content -LiteralPath $Path -Raw -Encoding UTF8|ConvertFrom-Json
     if($c.schema -ne 1){throw 'Unsupported configuration schema'}
@@ -12,6 +14,7 @@ function Read-WorkBoxConfig([string]$Path) {
     return $c
 }
 function Get-WorkBoxVM($Config) {
+    Assert-WorkBoxCompatibility (Test-WorkBoxCompatibilityFacts -Facts (Get-WorkBoxHostFacts -Config $Config) -Role host)
     $vm=Get-VM -Id ([guid]$Config.vmId)
     if($vm.Name -ne $Config.vmName -or $vm.State -ne 'Running'){throw 'Configured VM name/id/state mismatch; no automatic restart'}
     return $vm

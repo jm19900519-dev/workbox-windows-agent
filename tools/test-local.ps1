@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$EvidenceDirectory)
 $ErrorActionPreference='Stop'
+if($PSVersionTable.PSEdition -ne 'Core' -or $PSVersionTable.PSVersion.Major -lt 7){throw 'Run host validation with native PowerShell 7. Guest Windows PowerShell 5.1 is a separate runtime.'}
 $repo=Split-Path -Parent $PSScriptRoot
 New-Item -ItemType Directory -Path $EvidenceDirectory -Force|Out-Null
 & "$PSScriptRoot/validate.ps1" -ReportPath (Join-Path $EvidenceDirectory 'powershell-parse.json')

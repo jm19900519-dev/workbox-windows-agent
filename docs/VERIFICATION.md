@@ -1,5 +1,19 @@
 # Verification and limitations / 验证与限制
 
+Version criteria and host/guest, desktop/browser distinctions are in the [English compatibility matrix](COMPATIBILITY.en.md) / [中文兼容性矩阵](COMPATIBILITY.zh-CN.md). A capability preflight or synthetic version fixture establishes its checked conditions and decision logic, not real deployment on every listed Windows release. 版本预检或合成矩阵用例只证明已检查条件与判断逻辑，不是各Windows版本真实部署验收。
+
+The 2026-10-26 read-only preflight freshly checked the existing guest: EnterpriseEval build 26300 x64, Windows PowerShell 5.1, and an enabled non-administrator target account with an interactive session. Its effective execution policy was `Restricted`, blocking the portable fresh-install path. This is not evidence that the existing worker failed. No new guest installation was performed. The host baseline is Windows 11 Pro build 26100 x64 / PowerShell 7.6.5; these remain one-machine observations.
+
+2026-10-26 的只读预检已重新核现有来宾：EnterpriseEval build 26300 x64、Windows PowerShell 5.1，目标账户启用、非管理员且有交互会话。其有效执行策略为 `Restricted`，便携新安装路径因此阻断；不能据此认定现存 worker 失效，也未执行新来宾安装。宿主基线为 Windows 11 Pro build 26100 x64 / PowerShell 7.6.5，仍只是本机观察。
+
+The compatibility increment passed 40 injected version/condition fixtures plus two error-branch regressions, and seven independent fixtures exercised the actual installers' pre-write blocking and session-cleanup control flow without installing a guest. Affected PowerShell parsing, CLI exit boundaries, UTF-8 DPAPI behavior and native/WOW64 console `-CheckOnly` paths were checked. The 11 changed/new runtime files matched the independently reviewed hash manifest. These are decision, control-flow and local prerequisite checks, not new Windows-image deployment or UI tests.
+
+兼容性增量已通过40项注入版本/条件用例、2项错误分支回归，以及7项独立用例对实际安装器写入前阻断和会话清理控制流的检查，未安装来宾。受影响的PowerShell解析、CLI退出边界、UTF-8 DPAPI和原生/WOW64控制台 `-CheckOnly` 路径已验；11项改动/新增运行文件与独审核定哈希一致。这些证据只覆盖判断、控制流和本机前提，不是新Windows镜像部署或UI实测。
+
+The guest's checked Node was version 22 on x64. The supplied npm path was absent, and a bounded check of four standard entries beside that known Node executable also found none. This blocks the supplied browser-install inputs; it is not a full guest inventory and does not prove that npm must be newly installed. Existing services were not changed. Host browser preflight covers OS prerequisites only; guest browser preflight covers installation prerequisites only, and `readiness` remains `not-assessed`.
+
+本次来宾已核Node为22/x64；指定npm路径不存在，另对已知Node父目录的4个标准入口做了有界检查，未发现。它阻断的是本次浏览器安装输入，不是全来宾软件盘点，不能推出必须新装npm；现有服务未改。宿主浏览器预检仅核OS前提，来宾仅核安装前提，`readiness` 仍是 `not-assessed`。
+
 This candidate is not an independently proven cross-machine installer. Local source parsing, dependency lock resolution, privacy export, fixture tests and deterministic archive checks are recorded separately from live guest/UI tests. Consult the accompanying private handoff for the exact archive SHA and test reports; do not ship operator-specific raw evidence in this repository.
 
 本候选尚未经独立新机安装验收。源码解析、锁文件解析、隐私导出、fixture 与可复现归档检查和真实来宾/UI 测试分开记录。精确归档 SHA 与报告见私有交接，不把操作者原始证据混入仓库。

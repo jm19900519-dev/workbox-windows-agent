@@ -5,15 +5,21 @@ $c=Read-WorkBoxConfig $ConfigPath
 foreach($ip in @($GuestIPv4,$HostIPv4)){$parsed=$null;if(![Net.IPAddress]::TryParse($ip,[ref]$parsed) -or $parsed.AddressFamily -ne [Net.Sockets.AddressFamily]::InterNetwork -or $ip -eq '0.0.0.0' -or $ip -eq '255.255.255.255'){throw 'Provide one explicit IPv4 per side, no ranges'}}
 foreach($p in @($GuestNodePath,$GuestNpmPath,$GuestCacheDirectory)){if($p -notmatch '^[A-Za-z]:[\\/]' -or $p -match '[\r\n"`]' -or $p.Contains('..')){throw 'Use absolute guest paths'}}
 if(!$PSCmdlet.ShouldProcess($c.vmName,'Download browser dependencies in guest, restrict one firewall rule, register an interactive browser task')){return}
+Assert-WorkBoxCompatibility (Test-WorkBoxCompatibilityFacts -Facts (Get-WorkBoxHostFacts -Config $c) -Role host -Browser) -Browser
 $s=Open-WorkBoxSession $c
 try {
+ $preflight=Test-WorkBoxCompatibilityFacts -Facts (Get-WorkBoxGuestFacts -Session $s -Config $c -Browser -GuestNodePath $GuestNodePath -GuestNpmPath $GuestNpmPath) -Role guest -Browser
+ Assert-WorkBoxCompatibility $preflight -Browser
  $app=Join-Path $c.guestRoot 'browser'
- Invoke-Command -Session $s -ArgumentList $c,$app,$GuestNodePath,$GuestNpmPath -ScriptBlock {
-  param($c,$app,$node,$npm)
+ Invoke-Command -Session $s -ArgumentList $c,$app,$GuestNodePath,$GuestNpmPath,$GuestIPv4 -ScriptBlock {
+  param($c,$app,$node,$npm,$guestIp)
   if($env:COMPUTERNAME -ne $c.guestComputerName -or (Get-CimInstance Win32_ComputerSystem).Model -ne 'Virtual Machine'){throw 'Guest identity mismatch'}
   if(!(Test-Path (Join-Path $c.guestRoot 'guest.json'))){throw 'Install the desktop package first'}
   if(!(Test-Path $node) -or !(Test-Path $npm)){throw 'Install official Node.js in the guest first'}
   if(Test-Path $app){throw 'Browser directory exists; no overwrite'}
+  if(!(Get-NetIPAddress -AddressFamily IPv4|Where-Object IPAddress -eq $guestIp)){throw 'Guest IP mismatch; no files were installed'}
+  if(Get-NetFirewallRule -DisplayName 'WorkBox Browser Host Only' -ErrorAction SilentlyContinue){throw 'Firewall rule already exists; no files were installed'}
+  if(Get-ScheduledTask -TaskName 'WorkBox Browser Server' -ErrorAction SilentlyContinue){throw 'Task already exists; no files were installed'}
   New-Item -ItemType Directory -Path $app|Out-Null
  }
  foreach($name in @('server.cjs','package.json','package-lock.json')){Copy-Item -ToSession $s -LiteralPath "$PSScriptRoot/../browser/$name" -Destination (Join-Path $app $name)}
